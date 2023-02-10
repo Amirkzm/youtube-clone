@@ -2,34 +2,48 @@ import { useState, useCallback } from "react";
 
 type RequestMethod = "POST" | "GET" | "PUT" | "DELETE" | "HEAD";
 
+const BASE_URL = "https://youtube-v31.p.rapidapi.com/";
+
+const DEFAULT_OPTIONS = {
+  headers: {
+    "X-RapidAPI-Key": process.env.RAPID_API_KEY,
+    "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
+  },
+};
+
 type LazyFetchResult = [
   (payload: Omit<RequestInit, "method">) => Promise<any>,
   {
     isLoading: boolean;
     result: any;
-    error: boolean;
+    isError: boolean;
   }
 ];
 
-const useLazyFetch = (
-  url: string,
-  method: RequestMethod = "GET"
-): LazyFetchResult => {
+type RapidApiHeader = {
+  "X-RapidAPI-Key": string | undefined;
+  "X-RapidAPI-Host": string | undefined;
+};
+
+interface RequestOptions extends Omit<RequestInit, "headers"> {
+  headers?: RapidApiHeader | HeadersInit;
+}
+
+const useLazyFetch = (query: string): LazyFetchResult => {
   const [result, setResult] = useState<any>(null);
-  const [error, setError] = useState<boolean>(false);
+  const [isError, setisError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const sendRequest = useCallback(
-    async (payload: Omit<RequestInit, "method">) => {
+    async (option: RequestOptions = DEFAULT_OPTIONS) => {
       setIsLoading(true);
-      const options: RequestInit = {
-        method: method,
-        ...payload,
-      };
       try {
-        const response: Response = await fetch(url, options);
+        const response: Response = await fetch(
+          BASE_URL + query,
+          option as RequestInit
+        );
         if (!response.ok) {
-          setError(true);
+          setisError(true);
           throw new Error("Request Failed");
         }
         const jsonResponse = await response.json();
@@ -40,10 +54,10 @@ const useLazyFetch = (
         setIsLoading(false);
       }
     },
-    [url, method]
+    [query]
   );
 
-  return [sendRequest, { isLoading, result, error }];
+  return [sendRequest, { isLoading, result, isError }];
 };
 
 export default useLazyFetch;
