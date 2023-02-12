@@ -4,7 +4,7 @@ import ChannelCard from "./ChannelCard";
 import VideoItem from "./VideoItem";
 
 interface VideoFeedProps {
-  category: string;
+  category?: string;
   result: any;
   isLoading: boolean;
 }
@@ -30,9 +30,9 @@ const VideoFeed = (props: VideoFeedProps) => {
         sx={{ mt: 10, gap: 4, justifyContent: "center" }}
       >
         {!isLoading &&
-          result?.items.map((item: any) => {
+          result?.items.map((item: any, index: number) => {
             return (
-              <>
+              <Box key={index}>
                 {item?.id?.channelId && (
                   <Link to={`/channel/${item?.id?.channelId}`}>
                     <ChannelCard channelInfo={item} />
@@ -41,13 +41,13 @@ const VideoFeed = (props: VideoFeedProps) => {
                 {item?.id?.videoId && (
                   <VideoItem key={item?.id.videoId} videoDetail={item} />
                 )}
-              </>
+              </Box>
             );
           })}
         {isLoading &&
-          new Array(20).fill(1).map(() => {
+          new Array(20).fill(1).map((item, index) => {
             return (
-              <Stack sx={{ width: 340, height: 300, gap: 4 }}>
+              <Stack sx={{ width: 340, height: 300, gap: 4 }} key={index}>
                 <Skeleton variant="rectangular" width={340} height={300} />
                 <Skeleton />
                 <Skeleton width="60%" />
