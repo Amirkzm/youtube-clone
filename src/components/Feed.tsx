@@ -27,7 +27,6 @@ const Feed = () => {
         )
       );
     }
-    console.log(pagitnationCount);
   }, [result]);
 
   return (
