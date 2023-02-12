@@ -10,15 +10,16 @@ const DEFAULT_OPTIONS = {
   },
 };
 
-const useLazyFetch = (comp: string) => {
+const useLazyFetch = (comp?: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [result, setResult] = useState<any>(null);
 
   const sendRequest = useCallback(
     async (url: string) => {
-      console.log("start sending request to server for:", comp);
+      // console.log("start sending request to server for:", comp);
       setIsLoading(true);
+      // console.log(BASE_URL + url);
 
       try {
         const rawResponse = await fetch(BASE_URL + url, DEFAULT_OPTIONS);
