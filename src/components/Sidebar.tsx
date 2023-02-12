@@ -7,15 +7,20 @@ import {
 } from "@mui/material";
 import { categories } from "../utils/constants";
 
-const Sidebar = () => {
+interface SidebarProps {
+  changeCategory: (categoryName: string) => void;
+}
+
+const Sidebar = (props: SidebarProps) => {
   return (
     <List
       sx={{
-        pt: "70px",
+        mt: "70px",
         height: "90vh",
         px: 2,
-        borderRight: "2px solid background.paper",
+        borderRight: "2px solid gray",
       }}
+      id="sidebarRoot"
     >
       {categories.map((category, index) => {
         return (
@@ -26,6 +31,7 @@ const Sidebar = () => {
                 "&:hover>*": { color: "text.primary" },
                 borderRadius: 8,
               }}
+              onClick={() => props.changeCategory(category.name)}
             >
               <ListItemIcon sx={{ color: "primary.main" }}>
                 {category.icon}
