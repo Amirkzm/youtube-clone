@@ -9,9 +9,12 @@ import { categories } from "../utils/constants";
 
 interface SidebarProps {
   changeCategory: (categoryName: string) => void;
+  selectedCategory: string;
 }
 
 const Sidebar = (props: SidebarProps) => {
+  const { changeCategory, selectedCategory } = props;
+
   return (
     <List
       sx={{
@@ -30,10 +33,21 @@ const Sidebar = (props: SidebarProps) => {
                 "&:hover": { bgcolor: "primary.main" },
                 "&:hover>*": { color: "text.primary" },
                 borderRadius: 8,
+                bgcolor:
+                  selectedCategory === category.name
+                    ? "primary.main"
+                    : "common.black",
               }}
-              onClick={() => props.changeCategory(category.name)}
+              onClick={() => changeCategory(category.name)}
             >
-              <ListItemIcon sx={{ color: "primary.main" }}>
+              <ListItemIcon
+                sx={{
+                  color:
+                    selectedCategory === category.name
+                      ? "common.white"
+                      : "primary.main",
+                }}
+              >
                 {category.icon}
               </ListItemIcon>
               <ListItemText primary={category.name} />
