@@ -1,63 +1,48 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 
-type RequestMethod = "POST" | "GET" | "PUT" | "DELETE" | "HEAD";
-
-const BASE_URL = "https://youtube-v31.p.rapidapi.com/";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const DEFAULT_OPTIONS = {
+  method: "GET",
   headers: {
-    "X-RapidAPI-Key": process.env.RAPID_API_KEY,
+    "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
     "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
   },
 };
 
-type LazyFetchResult = [
-  (payload: Omit<RequestInit, "method">) => Promise<any>,
-  {
-    isLoading: boolean;
-    result: any;
-    isError: boolean;
-  }
-];
-
-type RapidApiHeader = {
-  "X-RapidAPI-Key": string | undefined;
-  "X-RapidAPI-Host": string | undefined;
-};
-
-interface RequestOptions extends Omit<RequestInit, "headers"> {
-  headers?: RapidApiHeader | HeadersInit;
-}
-
-const useLazyFetch = (query: string): LazyFetchResult => {
-  const [result, setResult] = useState<any>(null);
-  const [isError, setisError] = useState<boolean>(false);
+const useLazyFetch = (comp: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [result, setResult] = useState<any>(null);
 
   const sendRequest = useCallback(
-    async (option: RequestOptions = DEFAULT_OPTIONS) => {
+    async (url: string) => {
+      console.log("start sending request to server for:", comp);
       setIsLoading(true);
+
       try {
-        const response: Response = await fetch(
-          BASE_URL + query,
-          option as RequestInit
-        );
-        if (!response.ok) {
-          setisError(true);
-          throw new Error("Request Failed");
+        const rawResponse = await fetch(BASE_URL + url, DEFAULT_OPTIONS);
+        if (!rawResponse.ok) {
+          setIsError(true);
+          throw new Error("Request failed!");
         }
-        const jsonResponse = await response.json();
+
+        const jsonResponse = await rawResponse.json();
         setResult(jsonResponse);
-        return jsonResponse;
-      } catch (error: any) {
-        console.log(error?.message);
-        setIsLoading(false);
+      } catch (error) {
+        setIsError(true);
+        console.log("error happened");
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+        // setIsLoading(false);
       }
     },
-    [query]
+    [comp]
   );
 
-  return [sendRequest, { isLoading, result, isError }];
+  return { isLoading, isError, result, sendRequest };
 };
 
 export default useLazyFetch;
