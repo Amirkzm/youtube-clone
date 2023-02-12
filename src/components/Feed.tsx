@@ -34,7 +34,10 @@ const Feed = () => {
     <Stack>
       <Grid container id="gridcontainerfeed" sx={{ width: "100vw" }}>
         <Grid item xs={2} id="gridSidebar">
-          <Sidebar changeCategory={changeCategory} />
+          <Sidebar
+            changeCategory={changeCategory}
+            selectedCategory={selectedCategory}
+          />
         </Grid>
         <Grid item xs={10} sx={{ justifyContent: "center", width: "100%" }}>
           {!isError && (
