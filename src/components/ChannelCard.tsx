@@ -9,35 +9,46 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 interface ChannelCardProps {
   channelInfo: any;
+  asChannelLogo?: boolean;
 }
 
-const ChannelCard = ({ channelInfo }: ChannelCardProps) => {
+const ChannelCard = ({
+  channelInfo,
+  asChannelLogo = false,
+}: ChannelCardProps) => {
   return (
-    <Card sx={{ width: 340 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={channelInfo?.snippet?.thumbnails?.high?.url}
-          alt={channelInfo?.snippet?.title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {channelInfo?.snippet?.title}{" "}
-            <CheckCircleIcon
-              sx={{ fontSize: "14px", color: "gray", ml: "5px" }}
-            />
+    <Card
+      sx={{
+        width: 340,
+        bgcolor: asChannelLogo ? "common.black" : "Background.paper",
+      }}
+    >
+      <CardMedia
+        component="img"
+        height={asChannelLogo ? 240 : 140}
+        image={channelInfo?.snippet?.thumbnails?.high?.url}
+        alt={channelInfo?.snippet?.title}
+        sx={{
+          borderRadius: asChannelLogo ? "50%" : "0",
+          width: asChannelLogo ? 240 : "100%",
+        }}
+      />
+      <CardContent sx={{ mt: asChannelLogo ? 10 : 0 }}>
+        <Typography gutterBottom variant="h5" component="div">
+          {channelInfo?.snippet?.title}{" "}
+          <CheckCircleIcon
+            sx={{ fontSize: "14px", color: "gray", ml: "5px" }}
+          />
+        </Typography>
+        {channelInfo?.statistics && (
+          <Typography variant="body2" color="text.secondary">
+            {parseInt(channelInfo?.statistics?.subscriberCount).toLocaleString(
+              "en-US"
+            )}{" "}
+            Subscribers
           </Typography>
-          {channelInfo?.statistic && (
-            <Typography variant="body2" color="text.secondary">
-              {parseInt(
-                channelInfo?.statistics?.subscriberCount
-              ).toLocaleString("en-US")}{" "}
-              Subscribers
-            </Typography>
-          )}
-        </CardContent>
-      </CardActionArea>
+        )}
+      </CardContent>
     </Card>
   );
 };
