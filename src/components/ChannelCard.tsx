@@ -28,7 +28,7 @@ const ChannelCard = ({ channelInfo }: ChannelCardProps) => {
               sx={{ fontSize: "14px", color: "gray", ml: "5px" }}
             />
           </Typography>
-          {channelInfo?.statistic && (
+          {channelInfo?.statistics && (
             <Typography variant="body2" color="text.secondary">
               {parseInt(
                 channelInfo?.statistics?.subscriberCount
