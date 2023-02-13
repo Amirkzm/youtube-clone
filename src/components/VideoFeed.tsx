@@ -39,7 +39,9 @@ const VideoFeed = (props: VideoFeedProps) => {
                   </Link>
                 )}
                 {item?.id?.videoId && (
-                  <VideoItem key={item?.id.videoId} videoDetail={item} />
+                  <Link to={`/video/${item?.id?.videoId}`}>
+                    <VideoItem key={item?.id.videoId} videoDetail={item} />
+                  </Link>
                 )}
               </Box>
             );
