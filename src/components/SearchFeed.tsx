@@ -1,11 +1,13 @@
-import { Container, Stack } from "@mui/material";
-import { useEffect } from "react";
+import { Box, Container, Pagination, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
 import VideoFeed from "./VideoFeed";
 
 const SearchFeed = () => {
   const { sendRequest, isError, isLoading, result } = useLazyFetch();
+  const [pagitnationCount, setPagitnationCount] = useState<number>(10);
+
   const { searchTerm: query } = useParams();
   console.log(query);
 
@@ -14,13 +16,28 @@ const SearchFeed = () => {
       `search?q=${query}&part=snippet%2Cid&regionCode=US&maxResults=50&order=date`
     );
   }, []);
-  if (result) {
-    console.log(result);
-  }
+
+  useEffect(() => {
+    if (result) {
+      setPagitnationCount(
+        Math.floor(
+          result?.pageInfo?.totalResults / result?.pageInfo?.resultsPerPage
+        )
+      );
+    }
+  }, [result]);
+
   return (
-    <Container>
-      <VideoFeed result={result} isLoading={isLoading} />
-    </Container>
+    <Stack sx={{ width: "100vw", alignItems: "center" }}>
+      <Box sx={{ width: "80vw" }}>
+        <VideoFeed result={result} isLoading={isLoading} />
+      </Box>
+      <Pagination
+        count={pagitnationCount}
+        color="primary"
+        sx={{ alignSelf: "center", m: "40px" }}
+      />
+    </Stack>
   );
 };
 
