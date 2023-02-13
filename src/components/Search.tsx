@@ -1,9 +1,16 @@
 import { IconButton, InputBase, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useState } from "react";
+// import { redirect } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Search = () => {
+  const [query, setQuery] = useState<string>("");
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    return navigate(`/search/${query}`);
   };
 
   return (
@@ -22,6 +29,8 @@ const Search = () => {
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search..."
         inputProps={{ "aria-label": "search...`" }}
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
       />
       <IconButton
         type="button"
