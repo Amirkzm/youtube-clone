@@ -1,12 +1,13 @@
 import { useCallback, useState } from "react";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const key = import.meta.env.VITE_YOUTUBE_API_KEY;
+const credential = `key=${key}`;
 
 const DEFAULT_OPTIONS = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
-    "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
+    accept: "application/json",
   },
 };
 
@@ -17,12 +18,13 @@ const useLazyFetch = (comp?: string) => {
 
   const sendRequest = useCallback(
     async (url: string) => {
-      // console.log("start sending request to server for:", comp);
       setIsLoading(true);
-      // console.log(BASE_URL + url);
 
       try {
-        const rawResponse = await fetch(BASE_URL + url, DEFAULT_OPTIONS);
+        const rawResponse = await fetch(
+          BASE_URL + url + credential,
+          DEFAULT_OPTIONS
+        );
         if (!rawResponse.ok) {
           setIsError(true);
           throw new Error("Request failed!");
