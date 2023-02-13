@@ -16,7 +16,7 @@ const Feed = () => {
     useLazyFetch(selectedCategory);
 
   useEffect(() => {
-    sendRequest(`search?part=snippet&q=${selectedCategory}&maxResults=20`);
+    sendRequest(`search?part=snippet&maxResults=20&q=${selectedCategory}`);
   }, [sendRequest]);
 
   useEffect(() => {
