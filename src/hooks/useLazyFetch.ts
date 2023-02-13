@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.VITE_YOUTUBE_API_BASE_URL;
 const key = import.meta.env.VITE_YOUTUBE_API_KEY;
-const credential = `key=${key}`;
+const credential = `&key=${key}`;
 
 const DEFAULT_OPTIONS = {
   method: "GET",
@@ -19,6 +19,7 @@ const useLazyFetch = (comp?: string) => {
   const sendRequest = useCallback(
     async (url: string) => {
       setIsLoading(true);
+      console.log(BASE_URL + url + credential);
 
       try {
         const rawResponse = await fetch(
