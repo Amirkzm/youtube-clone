@@ -1,4 +1,4 @@
-import { Box, Container, Pagination, Stack } from "@mui/material";
+import { Box, Pagination, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
