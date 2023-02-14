@@ -10,7 +10,7 @@ const RelatedVideosSidebar = ({ videoId }: { videoId: string | undefined }) => {
 
   useEffect(() => {
     sendRequest(
-      `search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=20`
+      `search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=7`
     );
   }, [sendRequest]);
 
@@ -35,7 +35,7 @@ const RelatedVideosSidebar = ({ videoId }: { videoId: string | undefined }) => {
                   <VideoItem
                     key={item?.id.videoId}
                     videoDetail={item}
-                    bgcolor={"common.black"}
+                    bgColor={"#131313"}
                   />
                 </Link>
               )}
