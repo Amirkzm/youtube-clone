@@ -37,7 +37,7 @@ const VideoDetails = () => {
   return (
     <Stack sx={{ width: "100vw" }} direction={"row"}>
       <Stack sx={{ m: 10 }}>
-        <Box sx={{ width: "70vw" }}>
+        <Box sx={{ width: "60vw" }}>
           <ReactPlayer url={VIDEO_URL} controls width={"100%"} height={800} />
         </Box>
         <Stack sx={{ mt: 5, gap: 2 }}>
@@ -100,7 +100,7 @@ const VideoDetails = () => {
           })}
         </Stack>
       </Stack>
-      <Box sx={{ mt: 10 }}>
+      <Box sx={{ mt: 10, mr: 10 }}>
         <RelatedVideosSidebar videoId={videoId} />
       </Box>
     </Stack>
