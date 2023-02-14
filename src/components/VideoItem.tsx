@@ -15,7 +15,7 @@ import {
   demoChannelTitle,
 } from "../utils/constants";
 
-const VideoItem = ({ videoDetail }: any) => {
+const VideoItem = ({ videoDetail, bgColor }: any) => {
   const { id, snippet } = videoDetail;
 
   const title =
@@ -31,9 +31,10 @@ const VideoItem = ({ videoDetail }: any) => {
         borderRadius: 4,
         transition: "all 0.7",
         "&:hover": { zIndex: 100, transform: "scale(1.1)" },
+        bgcolor: bgColor,
       }}
     >
-      <CardActionArea sx={{ height: "100%" }}>
+      <CardActionArea sx={{ height: "100%", bgcolor: bgColor }}>
         <CardMedia
           component="img"
           height="140"
