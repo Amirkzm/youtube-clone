@@ -31,7 +31,6 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
         borderRadius: 4,
         transition: "all 0.7",
         "&:hover": { zIndex: 100, transform: "scale(1.1)" },
-        bgcolor: bgColor,
       }}
     >
       <CardActionArea sx={{ height: "100%", bgcolor: bgColor }}>
