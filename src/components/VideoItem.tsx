@@ -10,9 +10,7 @@ import { Link } from "react-router-dom";
 import {
   demoThumbnailUrl,
   demoVideoUrl,
-  demoVideoTitle,
   demoChannelUrl,
-  demoChannelTitle,
 } from "../utils/constants";
 
 const VideoItem = ({ videoDetail, bgColor }: any) => {
