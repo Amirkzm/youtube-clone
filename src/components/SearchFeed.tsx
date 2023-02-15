@@ -9,13 +9,12 @@ const SearchFeed = () => {
   const [pagitnationCount, setPagitnationCount] = useState<number>(10);
 
   const { searchTerm: query } = useParams();
-  console.log(query);
 
   useEffect(() => {
     sendRequest(
       `search?q=${query}&part=snippet%2Cid&regionCode=US&maxResults=50&order=date`
     );
-  }, []);
+  }, [sendRequest, query]);
 
   useEffect(() => {
     if (result) {
