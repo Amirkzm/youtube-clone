@@ -1,9 +1,9 @@
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 
 const PageContainer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Container
+    <Box
       sx={{
         position: "absolute",
         top: "56px",
@@ -12,11 +12,12 @@ const PageContainer = ({ children }: { children: React.ReactNode }) => {
         height: "92vh",
         p: 0,
         pt: 2,
+        bgcolor: "common.black",
       }}
       id="pageContainer"
     >
       {children}
-    </Container>
+    </Box>
   );
 };
 
