@@ -1,19 +1,16 @@
 import {
+  Box,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useCategoryContext } from "../context/CategoryContext";
 import { categories } from "../utils/constants";
 
-interface SidebarProps {
-  changeCategory: (categoryName: string) => void;
-  selectedCategory: string;
-}
-
-const Sidebar = (props: SidebarProps) => {
-  const { changeCategory, selectedCategory } = props;
+const Sidebar = () => {
+  const { selectedCategory, setSelectedCategory } = useCategoryContext();
 
   return (
     <List
@@ -27,7 +24,7 @@ const Sidebar = (props: SidebarProps) => {
     >
       {categories.map((category, index) => {
         return (
-          <ListItem disablePadding key={index}>
+          <ListItem key={index}>
             <ListItemButton
               sx={{
                 "&:hover": { bgcolor: "primary.main" },
@@ -38,7 +35,7 @@ const Sidebar = (props: SidebarProps) => {
                     ? "primary.main"
                     : "common.black",
               }}
-              onClick={() => changeCategory(category.name)}
+              onClick={() => setSelectedCategory(category.name)}
             >
               <ListItemIcon
                 sx={{
