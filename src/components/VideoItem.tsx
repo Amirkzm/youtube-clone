@@ -39,31 +39,31 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
           alt={snippet?.title}
         />
         <CardContent>
-          <Link to={id.videoId ? `/video/${id.videoId}` : demoVideoUrl}>
-            <Typography
-              gutterBottom
-              variant="subtitle1"
-              component="div"
-              sx={{
-                fontsize: "clamp(18px,5vw,20px)",
-                fontWeight: "bold",
-                color: "text.primary",
-              }}
-            >
-              {title}
-            </Typography>
-          </Link>
-          <Link
+          {/* <Link to={id.videoId ? `/video/${id.videoId}` : demoVideoUrl}> */}
+          <Typography
+            gutterBottom
+            variant="subtitle1"
+            component="div"
+            sx={{
+              fontsize: "clamp(18px,5vw,20px)",
+              fontWeight: "bold",
+              color: "text.primary",
+            }}
+          >
+            {title}
+          </Typography>
+          {/* </Link> */}
+          {/* <Link
             to={
               snippet?.channelId
                 ? `/channel/${snippet?.channelId}`
                 : demoChannelUrl
             }
-          >
-            <Typography variant="subtitle2" color="text.secondary">
-              {snippet?.channelTitle}
-            </Typography>
-          </Link>
+          > */}
+          <Typography variant="subtitle2" color="text.secondary">
+            {snippet?.channelTitle}
+          </Typography>
+          {/* </Link> */}
         </CardContent>
       </CardActionArea>
     </Card>
