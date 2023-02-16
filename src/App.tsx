@@ -11,7 +11,6 @@ function App() {
     <BrowserRouter>
       <Box sx={{ backgroundColor: "common.black" }}>
         <Navbar />
-        {/* <Feed /> */}
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/video/:id" element={<VideoDetails />} />
