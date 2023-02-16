@@ -1,27 +1,33 @@
 import { Avatar, Stack, Typography } from "@mui/material";
+import DOMPurify from "dompurify";
 
 interface CommentItemProps {
   authorAvatar: string;
   authorName: string;
-  children?: React.ReactNode;
+  children: string;
 }
 const CommentItem = ({
   authorAvatar,
   authorName,
   children,
 }: CommentItemProps) => {
-  console.log("commentitemComponent");
+  const sanitizedData = () => ({
+    __html: DOMPurify.sanitize(children),
+  });
   return (
     <Stack
       direction={"row"}
       justifyContent="flex-start"
       gap={2}
-      sx={{ mt: 5, bgcolor: "background.paper", p: 2, borderRadius: 4 }}
+      sx={{ mt: 1, p: 2, borderRadius: 4 }}
     >
       <Avatar alt={authorName} src={authorAvatar} />
-      <Typography variant="body1" sx={{ ml: 5 }}>
-        {children}
-      </Typography>
+      <Typography
+        variant="body1"
+        component={"div"}
+        sx={{ ml: 5, color: "common.white" }}
+        dangerouslySetInnerHTML={sanitizedData()}
+      ></Typography>
     </Stack>
   );
 };
