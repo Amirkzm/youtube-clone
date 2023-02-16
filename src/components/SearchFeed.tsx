@@ -2,6 +2,7 @@ import { Box, Pagination, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
+import PageContainer from "./PageContainer";
 import VideoFeed from "./VideoFeed";
 
 const SearchFeed = () => {
@@ -27,16 +28,18 @@ const SearchFeed = () => {
   }, [result]);
 
   return (
-    <Stack sx={{ width: "100vw", alignItems: "center" }}>
-      <Box sx={{ width: "80vw" }}>
-        <VideoFeed result={result} isLoading={isLoading} />
-      </Box>
-      <Pagination
-        count={pagitnationCount}
-        color="primary"
-        sx={{ alignSelf: "center", m: "40px" }}
-      />
-    </Stack>
+    <PageContainer>
+      <Stack sx={{ width: "100%", alignItems: "center" }}>
+        <Box sx={{ width: "80vw" }}>
+          <VideoFeed result={result} isLoading={isLoading} />
+        </Box>
+        <Pagination
+          count={pagitnationCount}
+          color="primary"
+          sx={{ alignSelf: "center", m: "40px" }}
+        />
+      </Stack>
+    </PageContainer>
   );
 };
 
