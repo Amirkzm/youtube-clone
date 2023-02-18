@@ -1,5 +1,6 @@
 import { Avatar, Stack, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
+import { useRef } from "react";
 
 interface CommentItemProps {
   authorAvatar: string;
@@ -14,12 +15,14 @@ const CommentItem = ({
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(children),
   });
+
   return (
     <Stack
       direction={"row"}
       justifyContent="flex-start"
       gap={2}
       sx={{ mt: 1, p: 2, borderRadius: 4 }}
+      id="commentItemRoot"
     >
       <Avatar alt={authorName} src={authorAvatar} />
       <Typography
