@@ -5,6 +5,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import DOMPurify from "dompurify";
 import { Link } from "react-router-dom";
 
 import {
@@ -24,8 +25,9 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
   return (
     <Card
       sx={{
-        maxWidth: 345,
-        width: 340,
+        // maxWidth: 345,
+        width: 345,
+        height: 256,
         borderRadius: 4,
         transition: "all 0.7",
         "&:hover": { zIndex: 100, transform: "scale(1.1)" },
@@ -39,7 +41,6 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
           alt={snippet?.title}
         />
         <CardContent>
-          {/* <Link to={id.videoId ? `/video/${id.videoId}` : demoVideoUrl}> */}
           <Typography
             gutterBottom
             variant="subtitle1"
@@ -49,21 +50,15 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
               fontWeight: "bold",
               color: "text.primary",
             }}
-          >
-            {title}
-          </Typography>
-          {/* </Link> */}
-          {/* <Link
-            to={
-              snippet?.channelId
-                ? `/channel/${snippet?.channelId}`
-                : demoChannelUrl
-            }
-          > */}
-          <Typography variant="subtitle2" color="text.secondary">
-            {snippet?.channelTitle}
-          </Typography>
-          {/* </Link> */}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}
+          ></Typography>
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(snippet?.channelTitle),
+            }}
+          ></Typography>
         </CardContent>
       </CardActionArea>
     </Card>
