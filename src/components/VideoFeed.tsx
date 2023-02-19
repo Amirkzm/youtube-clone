@@ -98,7 +98,6 @@ const VideoFeed = (props: VideoFeedProps) => {
 };
 
 const isAnyChannel = (result: any) => {
-  let numberOfChannels = 0;
   const hasAny = result?.items?.some((item: any) => {
     if (item?.id?.channelId) {
       return true;
