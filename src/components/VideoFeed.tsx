@@ -103,7 +103,6 @@ const isAnyChannel = (result: any) => {
       return true;
     }
   });
-  console.log("isAnychannel=", hasAny);
   return hasAny;
 };
 

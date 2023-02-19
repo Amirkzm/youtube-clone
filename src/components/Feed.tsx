@@ -7,15 +7,8 @@ import Sidebar from "./Sidebar";
 import VideoFeed from "./VideoFeed";
 
 const Feed = () => {
-  // const [selectedCategory, setSelectedCategory] = useState<string>("New");
   const { selectedCategory, setSelectedCategory } = useCategoryContext();
   const [pagitnationCount, setPagitnationCount] = useState<number>(10);
-
-  console.log(selectedCategory);
-
-  // const changeCategory = (categoryName: string) => {
-  //   setSelectedCategory(categoryName);
-  // };
 
   const { sendRequest, isLoading, isError, result } =
     useLazyFetch(selectedCategory);

@@ -1,6 +1,5 @@
 import { Avatar, Stack, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
-import { useRef } from "react";
 
 interface CommentItemProps {
   authorAvatar: string;

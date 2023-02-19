@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useLazyFetch from "../../hooks/useLazyFetch";
 import { useParams } from "react-router-dom";
 import { Stack } from "@mui/system";
 import ReactPlayer from "react-player";
 import { Box, Paper, Typography } from "@mui/material";
-import CommentItem from "./CommentItem";
 import RelatedVideosSidebar from "./RelatedVideosSidebar";
 import ShowLessOrMore from "../ShowLessOrMore";
 import PageContainer from "../PageContainer";

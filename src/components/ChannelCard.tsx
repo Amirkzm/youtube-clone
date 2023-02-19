@@ -18,10 +18,7 @@ const ChannelCard = ({ channelInfo }: ChannelCardProps) => {
       sx={{
         width: 345,
         height: 256,
-        // bgcolor: "primary.main",
         "&:hover": { zIndex: 100, transform: "scale(1.1)" },
-        // p: 5,
-        // borderRadius: "50%",
       }}
     >
       <CardActionArea

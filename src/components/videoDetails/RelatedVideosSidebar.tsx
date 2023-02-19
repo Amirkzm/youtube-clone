@@ -1,8 +1,7 @@
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useLazyFetch from "../../hooks/useLazyFetch";
-import ChannelCard from "../ChannelCard";
 import VideoItem from "../VideoItem";
 
 const RelatedVideosSidebar = ({ videoId }: { videoId: string | undefined }) => {
@@ -42,7 +41,6 @@ const RelatedVideosSidebar = ({ videoId }: { videoId: string | undefined }) => {
             </Box>
           );
         })}
-      {console.log(result)}
       {isLoading ||
         (isError &&
           new Array(20).fill(1).map((item, index) => {

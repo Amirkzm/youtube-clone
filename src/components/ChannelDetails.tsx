@@ -14,8 +14,6 @@ const ChannelCardWrapper = styled(Box)((theme) => ({
 }));
 
 const ChannelDetails = () => {
-  //   console.log("chanldetails");
-
   const { sendRequest, isLoading, isError, result } = useLazyFetch();
   const [pagitnationCount, setPagitnationCount] = useState<number>(10);
   const {

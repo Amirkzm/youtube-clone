@@ -7,7 +7,6 @@ interface ShowLessOrMoreProps {
 }
 
 const ShowLessOrMore = (props: ShowLessOrMoreProps) => {
-  console.log("inside showlessor more");
   const { children, useCase } = props;
   const [showMore, setShowMore] = useState<boolean>(false);
   const [showCollapse, setShowCollapse] = useState<boolean>(true);

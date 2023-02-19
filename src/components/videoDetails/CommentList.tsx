@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useLazyFetch from "../../hooks/useLazyFetch";
 import ShowLessOrMore from "../ShowLessOrMore";
 import CommentItem from "./CommentItem";

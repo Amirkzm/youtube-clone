@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import DOMPurify from "dompurify";
-import { Link } from "react-router-dom";
 
 import {
   demoThumbnailUrl,
