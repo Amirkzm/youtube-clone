@@ -9,7 +9,6 @@ const PageContainer = ({ children }: { children: React.ReactNode }) => {
         top: "56px",
         left: 0,
         width: "100vw",
-        height: "92vh",
         p: 0,
         pt: 2,
         bgcolor: "common.black",
