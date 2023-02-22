@@ -7,13 +7,20 @@ interface VideoFeedProps {
   category?: string;
   result: any;
   isLoading: boolean;
+  showChannels?: boolean;
 }
 
 const VideoFeed = (props: VideoFeedProps) => {
-  const { category, result, isLoading } = props;
+  const { category, result, isLoading, showChannels = true } = props;
+
+  const displayChannels = !showChannels
+    ? "none"
+    : isAnyChannel(result)
+    ? "block"
+    : "none";
   return (
     <Stack sx={{ mt: 10 }}>
-      <Stack sx={{ display: isAnyChannel(result) ? "block" : "none" }}>
+      <Stack sx={{ display: displayChannels }}>
         <Typography variant="h1" sx={{ alignSelf: "start", pl: 5 }}>
           <Typography
             component={"span"}
