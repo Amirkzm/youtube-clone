@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import DOMPurify from "dompurify";
+import { Link } from "react-router-dom";
 
 import {
   demoThumbnailUrl,
@@ -51,13 +52,16 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
             }}
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}
           ></Typography>
-          <Typography
-            variant="subtitle2"
-            color="text.secondary"
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(snippet?.channelTitle),
-            }}
-          ></Typography>
+          <Link to={`/channel/${snippet?.channelId}`}>
+            <Typography
+              variant="subtitle2"
+              color="text.secondary"
+              sx={{ "&:hover": { color: "primary.main" } }}
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(snippet?.channelTitle),
+              }}
+            ></Typography>
+          </Link>
         </CardContent>
       </CardActionArea>
     </Card>
