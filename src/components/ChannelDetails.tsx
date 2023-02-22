@@ -60,7 +60,11 @@ const ChannelDetails = () => {
         <ChannelLogo channelInfo={result?.items[0]} />
       </ChannelCardWrapper>
       <Box sx={{ mt: 20 }}>
-        <VideoFeed result={vidResult} isLoading={isLoadingVid} />
+        <VideoFeed
+          result={vidResult}
+          isLoading={isLoadingVid}
+          showChannels={false}
+        />
       </Box>
       <Pagination
         count={pagitnationCount}
