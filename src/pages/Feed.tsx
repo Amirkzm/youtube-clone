@@ -5,15 +5,18 @@ import useLazyFetch from "../hooks/useLazyFetch";
 import PageContainer from "../components/PageContainer";
 import Sidebar from "../components/layouts/Sidebar";
 import VideoFeed from "../components/videos/VideoFeed";
+import { usePagination } from "../hooks";
 
 const Feed = () => {
   const { selectedCategory, setSelectedCategory } = useCategoryContext();
-  const [pagitnationCount, setPagitnationCount] = useState<number>(10);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageToken, setPageToken] = useState<string>("");
-
+  // const [pagitnationCount, setPagitnationCount] = useState<number>(10);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [pageToken, setPageToken] = useState<string>("");
   const { sendRequest, isLoading, isError, result } =
     useLazyFetch(selectedCategory);
+
+  const { paginationCount, currentPage, pageToken, pageHandler } =
+    usePagination(result);
 
   useEffect(() => {
     if (currentPage === 1) {
@@ -25,24 +28,27 @@ const Feed = () => {
     }
   }, [pageToken, currentPage, selectedCategory]);
 
-  useEffect(() => {
-    if (result) {
-      setPagitnationCount(
-        Math.floor(
-          result?.pageInfo?.totalResults / result?.pageInfo?.resultsPerPage
-        )
-      );
-    }
-  }, [result]);
+  // const [pagitnationCount, currentPage, pageToken, PageHandler] =
+  //   usePagination(result);
 
-  const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-    if (page > currentPage) {
-      setPageToken(result?.nextPageToken);
-    } else if (page < currentPage) {
-      setPageToken(result?.prevPageToken);
-    }
-    setCurrentPage(page);
-  };
+  // useEffect(() => {
+  //   if (result) {
+  //     setPagitnationCount(
+  //       Math.floor(
+  //         result?.pageInfo?.totalResults / result?.pageInfo?.resultsPerPage
+  //       )
+  //     );
+  //   }
+  // }, [result]);
+
+  // const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+  //   if (page > currentPage) {
+  //     setPageToken(result?.nextPageToken);
+  //   } else if (page < currentPage) {
+  //     setPageToken(result?.prevPageToken);
+  //   }
+  //   setCurrentPage(page);
+  // };
 
   return (
     <PageContainer>
@@ -67,11 +73,11 @@ const Feed = () => {
           </Grid>
         </Grid>
         <Pagination
-          count={pagitnationCount}
+          count={paginationCount}
           color="primary"
           sx={{ alignSelf: "center", m: "40px" }}
           page={currentPage}
-          onChange={PageHandler}
+          onChange={pageHandler}
         />
       </Stack>
     </PageContainer>

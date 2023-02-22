@@ -4,14 +4,17 @@ import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
 import PageContainer from "../components/PageContainer";
 import VideoFeed from "../components/videos/VideoFeed";
+import { usePagination } from "../hooks";
 
 const SearchFeed = () => {
   const { sendRequest, isError, isLoading, result } = useLazyFetch();
-  const [pagitnationCount, setPagitnationCount] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageToken, setPageToken] = useState<string>("");
+  // const [pagitnationCount, setPagitnationCount] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [pageToken, setPageToken] = useState<string>("");
 
   const { searchTerm: query } = useParams();
+  const { paginationCount, currentPage, pageToken, pageHandler } =
+    usePagination(result);
 
   useEffect(() => {
     if (currentPage === 1) {
@@ -25,24 +28,24 @@ const SearchFeed = () => {
     }
   }, [sendRequest, query, pageToken, currentPage]);
 
-  useEffect(() => {
-    if (result) {
-      setPagitnationCount(
-        Math.floor(
-          result?.pageInfo?.totalResults / result?.pageInfo?.resultsPerPage
-        )
-      );
-    }
-  }, [result]);
+  // useEffect(() => {
+  //   if (result) {
+  //     setPagitnationCount(
+  //       Math.floor(
+  //         result?.pageInfo?.totalResults / result?.pageInfo?.resultsPerPage
+  //       )
+  //     );
+  //   }
+  // }, [result]);
 
-  const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-    if (page > currentPage) {
-      setPageToken(result?.nextPageToken);
-    } else if (page < currentPage) {
-      setPageToken(result?.prevPageToken);
-    }
-    setCurrentPage(page);
-  };
+  // const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+  //   if (page > currentPage) {
+  //     setPageToken(result?.nextPageToken);
+  //   } else if (page < currentPage) {
+  //     setPageToken(result?.prevPageToken);
+  //   }
+  //   setCurrentPage(page);
+  // };
 
   return (
     <PageContainer>
@@ -51,11 +54,11 @@ const SearchFeed = () => {
           <VideoFeed result={result} isLoading={isLoading} />
         </Box>
         <Pagination
-          count={pagitnationCount}
+          count={paginationCount}
           color="primary"
           sx={{ alignSelf: "center", m: "40px" }}
           page={currentPage}
-          onChange={PageHandler}
+          onChange={pageHandler}
         />
       </Stack>
     </PageContainer>

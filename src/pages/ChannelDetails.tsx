@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
 import ChannelLogo from "../components/channels/ChannelLogo";
 import VideoFeed from "../components/videos/VideoFeed";
+import { usePagination } from "../hooks";
 
 const ChannelCardWrapper = styled(Box)((theme) => ({
   position: "absolute",
@@ -15,9 +16,9 @@ const ChannelCardWrapper = styled(Box)((theme) => ({
 
 const ChannelDetails = () => {
   const { sendRequest, isLoading, isError, result } = useLazyFetch();
-  const [pagitnationCount, setPagitnationCount] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageToken, setPageToken] = useState<string>("");
+  // const [pagitnationCount, setPagitnationCount] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [pageToken, setPageToken] = useState<string>("");
 
   const {
     sendRequest: sendRequestVids,
@@ -26,6 +27,9 @@ const ChannelDetails = () => {
     result: vidResult,
   } = useLazyFetch();
   const { id: channelId } = useParams();
+
+  const { paginationCount, currentPage, pageToken, pageHandler } =
+    usePagination(vidResult);
 
   useEffect(() => {
     sendRequest(`channels?part=snippet&id=${channelId}`);
@@ -40,25 +44,25 @@ const ChannelDetails = () => {
     }
   }, [sendRequest, sendRequestVids, channelId, pageToken]);
 
-  useEffect(() => {
-    if (vidResult) {
-      setPagitnationCount(
-        Math.floor(
-          vidResult?.pageInfo?.totalResults /
-            vidResult?.pageInfo?.resultsPerPage
-        )
-      );
-    }
-  }, [vidResult]);
+  // useEffect(() => {
+  //   if (vidResult) {
+  //     setPagitnationCount(
+  //       Math.floor(
+  //         vidResult?.pageInfo?.totalResults /
+  //           vidResult?.pageInfo?.resultsPerPage
+  //       )
+  //     );
+  //   }
+  // }, [vidResult]);
 
-  const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-    if (page > currentPage) {
-      setPageToken(result?.nextPageToken);
-    } else if (page < currentPage) {
-      setPageToken(result?.prevPageToken);
-    }
-    setCurrentPage(page);
-  };
+  // const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+  //   if (page > currentPage) {
+  //     setPageToken(result?.nextPageToken);
+  //   } else if (page < currentPage) {
+  //     setPageToken(result?.prevPageToken);
+  //   }
+  //   setCurrentPage(page);
+  // };
 
   return (
     <Stack
@@ -88,11 +92,11 @@ const ChannelDetails = () => {
         />
       </Box>
       <Pagination
-        count={pagitnationCount}
+        count={paginationCount}
         color="primary"
         sx={{ alignSelf: "center", m: "40px" }}
         page={currentPage}
-        onChange={PageHandler}
+        onChange={pageHandler}
       />
     </Stack>
   );
