@@ -9,13 +9,21 @@ import VideoFeed from "./VideoFeed";
 const Feed = () => {
   const { selectedCategory, setSelectedCategory } = useCategoryContext();
   const [pagitnationCount, setPagitnationCount] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageToken, setPageToken] = useState<string>("");
 
   const { sendRequest, isLoading, isError, result } =
     useLazyFetch(selectedCategory);
 
   useEffect(() => {
-    sendRequest(`search?part=snippet&maxResults=20&q=${selectedCategory}`);
-  }, [sendRequest]);
+    if (currentPage === 1) {
+      sendRequest(`search?part=snippet&maxResults=20&q=${selectedCategory}`);
+    } else {
+      sendRequest(
+        `search?part=snippet&maxResults=20&q=${selectedCategory}&pageToken=${result?.nextPageToken}`
+      );
+    }
+  }, [pageToken, currentPage, selectedCategory]);
 
   useEffect(() => {
     if (result) {
@@ -26,6 +34,15 @@ const Feed = () => {
       );
     }
   }, [result]);
+
+  const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+    if (page > currentPage) {
+      setPageToken(result?.nextPageToken);
+    } else if (page < currentPage) {
+      setPageToken(result?.prevPageToken);
+    }
+    setCurrentPage(page);
+  };
 
   return (
     <PageContainer>
@@ -53,6 +70,8 @@ const Feed = () => {
           count={pagitnationCount}
           color="primary"
           sx={{ alignSelf: "center", m: "40px" }}
+          page={currentPage}
+          onChange={PageHandler}
         />
       </Stack>
     </PageContainer>
