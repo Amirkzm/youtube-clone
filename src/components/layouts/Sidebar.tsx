@@ -17,14 +17,13 @@ const Sidebar = () => {
       sx={{
         mt: "70px",
         height: "90vh",
-        px: 2,
+        pr: 2,
         borderRight: "2px solid gray",
       }}
-      id="sidebarRoot"
     >
       {categories.map((category, index) => {
         return (
-          <ListItem key={index}>
+          <ListItem key={index} sx={{ width: "fit-content" }}>
             <ListItemButton
               sx={{
                 "&:hover": { bgcolor: "primary.main" },
@@ -34,6 +33,7 @@ const Sidebar = () => {
                   selectedCategory === category.name
                     ? "primary.main"
                     : "common.black",
+                width: "100%",
               }}
               onClick={() => setSelectedCategory(category.name)}
             >
