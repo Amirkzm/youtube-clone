@@ -1,7 +1,5 @@
-import { Box, Pagination, Skeleton, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import useLazyFetch from "../../hooks/useLazyFetch";
 import ChannelCard from "../channels/ChannelCard";
 import VideoItem from "./VideoItem";
 

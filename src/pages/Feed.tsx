@@ -10,9 +10,6 @@ import { Pagination } from "../components";
 
 const Feed = () => {
   const { selectedCategory, setSelectedCategory } = useCategoryContext();
-  // const [pagitnationCount, setPagitnationCount] = useState<number>(10);
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [pageToken, setPageToken] = useState<string>("");
   const { sendRequest, isLoading, isError, result } =
     useLazyFetch(selectedCategory);
 
@@ -27,28 +24,6 @@ const Feed = () => {
       );
     }
   }, [pageToken, currentPage, selectedCategory]);
-
-  // const [pagitnationCount, currentPage, pageToken, PageHandler] =
-  //   usePagination(result);
-
-  // useEffect(() => {
-  //   if (result) {
-  //     setPagitnationCount(
-  //       Math.floor(
-  //         result?.pageInfo?.totalResults / result?.pageInfo?.resultsPerPage
-  //       )
-  //     );
-  //   }
-  // }, [result]);
-
-  // const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-  //   if (page > currentPage) {
-  //     setPageToken(result?.nextPageToken);
-  //   } else if (page < currentPage) {
-  //     setPageToken(result?.prevPageToken);
-  //   }
-  //   setCurrentPage(page);
-  // };
 
   return (
     <PageContainer>
@@ -72,14 +47,6 @@ const Feed = () => {
             )}
           </Grid>
         </Grid>
-        {/* <Pagination
-          // count={paginationCount}
-          color="primary"
-          sx={{ alignSelf: "center", m: "40px" }}
-          page={currentPage}
-          onChange={pageHandler}
-          disabled={false}
-        /> */}
         <Pagination page={currentPage} onChangePage={pageHandler} />
       </Stack>
     </PageContainer>

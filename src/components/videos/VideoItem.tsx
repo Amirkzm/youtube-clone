@@ -8,11 +8,7 @@ import {
 import DOMPurify from "dompurify";
 import { Link } from "react-router-dom";
 
-import {
-  demoThumbnailUrl,
-  demoVideoUrl,
-  demoChannelUrl,
-} from "../../utils/constants";
+import { demoThumbnailUrl } from "../../utils/constants";
 
 const VideoItem = ({ videoDetail, bgColor }: any) => {
   const { id, snippet } = videoDetail;
