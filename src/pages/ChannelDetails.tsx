@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 import { Stack } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
 import ChannelLogo from "../components/channels/ChannelLogo";
@@ -17,9 +17,6 @@ const ChannelCardWrapper = styled(Box)((theme) => ({
 
 const ChannelDetails = () => {
   const { sendRequest, isLoading, isError, result } = useLazyFetch();
-  // const [pagitnationCount, setPagitnationCount] = useState<number>(1);
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [pageToken, setPageToken] = useState<string>("");
 
   const {
     sendRequest: sendRequestVids,
@@ -29,8 +26,7 @@ const ChannelDetails = () => {
   } = useLazyFetch();
   const { id: channelId } = useParams();
 
-  const { paginationCount, currentPage, pageToken, pageHandler } =
-    usePagination(vidResult);
+  const { currentPage, pageToken, pageHandler } = usePagination(vidResult);
 
   useEffect(() => {
     sendRequest(`channels?part=snippet&id=${channelId}`);
@@ -44,26 +40,6 @@ const ChannelDetails = () => {
       );
     }
   }, [sendRequest, sendRequestVids, channelId, pageToken]);
-
-  // useEffect(() => {
-  //   if (vidResult) {
-  //     setPagitnationCount(
-  //       Math.floor(
-  //         vidResult?.pageInfo?.totalResults /
-  //           vidResult?.pageInfo?.resultsPerPage
-  //       )
-  //     );
-  //   }
-  // }, [vidResult]);
-
-  // const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-  //   if (page > currentPage) {
-  //     setPageToken(result?.nextPageToken);
-  //   } else if (page < currentPage) {
-  //     setPageToken(result?.prevPageToken);
-  //   }
-  //   setCurrentPage(page);
-  // };
 
   return (
     <Stack
@@ -88,17 +64,8 @@ const ChannelDetails = () => {
           result={vidResult}
           isLoading={isLoadingVid}
           showChannels={false}
-          // useExternalData={true}
-          // parentPageHandler={pageHandler}
         />
       </Box>
-      {/* <Pagination
-        count={paginationCount}
-        color="primary"
-        sx={{ alignSelf: "center", m: "40px" }}
-        page={currentPage}
-        onChange={pageHandler}
-      /> */}
       <Pagination page={currentPage} onChangePage={pageHandler} />
     </Stack>
   );

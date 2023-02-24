@@ -14,8 +14,7 @@ const SearchFeed = () => {
   // const [pageToken, setPageToken] = useState<string>("");
 
   const { searchTerm: query } = useParams();
-  const { paginationCount, currentPage, pageToken, pageHandler } =
-    usePagination(result);
+  const { currentPage, pageToken, pageHandler } = usePagination(result);
 
   useEffect(() => {
     if (currentPage === 1) {

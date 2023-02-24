@@ -16,8 +16,7 @@ const Feed = () => {
   const { sendRequest, isLoading, isError, result } =
     useLazyFetch(selectedCategory);
 
-  const { paginationCount, currentPage, pageToken, pageHandler } =
-    usePagination(result);
+  const { currentPage, pageToken, pageHandler } = usePagination(result);
 
   useEffect(() => {
     if (currentPage === 1) {
