@@ -12,8 +12,8 @@ const PageContainer = ({ children }: { children: React.ReactNode }) => {
         p: 0,
         pt: 2,
         bgcolor: "common.black",
+        minHeight: "100vh",
       }}
-      id="pageContainer"
     >
       {children}
     </Box>
