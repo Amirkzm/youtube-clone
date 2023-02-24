@@ -25,7 +25,6 @@ const VideoItem = ({ videoDetail, bgColor }: any) => {
   return (
     <Card
       sx={{
-        // maxWidth: 345,
         width: 345,
         height: 256,
         borderRadius: 4,

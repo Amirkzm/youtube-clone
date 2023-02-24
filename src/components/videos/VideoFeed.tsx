@@ -7,60 +7,13 @@ import VideoItem from "./VideoItem";
 
 interface VideoFeedProps {
   selectedCategory?: string;
-  // externalData?: any;
-  // externalLoading?: boolean;
   result: any;
   isLoading: boolean;
   showChannels?: boolean;
-  // useExternalData?: boolean;
-  // parentPageHandler?: (page: number) => void;
 }
 
 const VideoFeed = (props: VideoFeedProps) => {
-  const {
-    selectedCategory,
-    showChannels = true,
-    // externalData = null,
-    // externalLoading = true,
-    // useExternalData = false,
-    // parentPageHandler,
-    result,
-    isLoading,
-  } = props;
-
-  // const [pagitnationCount, setPagitnationCount] = useState<number>(10);
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [pageToken, setPageToken] = useState<string>("");
-  // const { sendRequest, isLoading, isError, result } =
-  //   useLazyFetch(selectedCategory);
-
-  // useEffect(() => {
-  //   if (!useExternalData) {
-  //     if (currentPage === 1) {
-  //       sendRequest(`search?part=snippet&maxResults=20&q=${selectedCategory}`);
-  //     } else {
-  //       sendRequest(
-  //         `search?part=snippet&maxResults=20&q=${selectedCategory}&pageToken=${pageToken}`
-  //       );
-  //     }
-  //   }
-  // }, [pageToken, currentPage, selectedCategory]);
-
-  // const data = useExternalData ? externalData : result;
-  // const reqIsLoading = useExternalData ? externalLoading : isLoading;
-
-  // const PageHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-  //   if (!useExternalData) {
-  //     if (page > currentPage) {
-  //       setPageToken(data?.nextPageToken);
-  //     } else if (page < currentPage) {
-  //       setPageToken(data?.prevPageToken);
-  //     }
-  //   } else {
-  //     parentPageHandler!(page);
-  //   }
-  //   setCurrentPage(page);
-  // };
+  const { selectedCategory, showChannels = true, result, isLoading } = props;
 
   const displayChannels = !showChannels
     ? "none"
@@ -150,13 +103,6 @@ const VideoFeed = (props: VideoFeedProps) => {
             })}
         </Stack>
       </Stack>
-      {/* <Pagination
-        count={pagitnationCount}
-        color="primary"
-        sx={{ alignSelf: "center", m: "40px" }}
-        page={currentPage}
-        onChange={PageHandler}
-      /> */}
     </Stack>
   );
 };
@@ -171,8 +117,3 @@ const isAnyChannel = (data: any) => {
 };
 
 export default VideoFeed;
-
-// AIzaSyBUGsiwwA5aodDhJ78NyCvYKKJJ-tEPZNA
-{
-  /* <Skeleton variant="rectangular" width={210} height={118} /> */
-}
