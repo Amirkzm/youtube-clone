@@ -16,12 +16,9 @@ const useLazyFetch = (comp?: string) => {
   const [isError, setIsError] = useState<boolean>(false);
   const [result, setResult] = useState<any>(null);
 
-  console.log(BASE_URL);
-
   const sendRequest = useCallback(
     async (url: string) => {
       setIsLoading(true);
-      console.log(BASE_URL + url + credential);
 
       try {
         const rawResponse = await fetch(
