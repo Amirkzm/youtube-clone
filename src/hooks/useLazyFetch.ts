@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 
-// const BASE_URL = import.meta.env.VITE_YOUTUBE_API_BASE_URL;
-const BASE_URL = "https://youtube.googleapis.com/youtube/v3/";
-// const key = import.meta.env.VITE_YOUTUBE_API_KEY;
-const key = "AIzaSyDCwM3Ae5wQC231Aai9NyTG4Ds2SF6wphs";
+const BASE_URL = import.meta.env.VITE_YOUTUBE_API_BASE_URL;
+// const BASE_URL = "https://youtube.googleapis.com/youtube/v3/";
+const key = import.meta.env.VITE_YOUTUBE_API_KEY;
+// const key = "AIzaSyDCwM3Ae5wQC231Aai9NyTG4Ds2SF6wphs";
 const credential = `&key=${key}`;
 
 const DEFAULT_OPTIONS = {
@@ -17,6 +17,8 @@ const useLazyFetch = (comp?: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [result, setResult] = useState<any>(null);
+
+  console.log(BASE_URL);
 
   const sendRequest = useCallback(
     async (url: string) => {
@@ -38,11 +40,11 @@ const useLazyFetch = (comp?: string) => {
       } catch (error) {
         setIsError(true);
         console.log("error happened");
+        console.log(error);
       } finally {
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
-        // setIsLoading(false);
       }
     },
     [comp]
@@ -52,3 +54,6 @@ const useLazyFetch = (comp?: string) => {
 };
 
 export default useLazyFetch;
+
+//key=AIzaSyDkl3WqZyucx3qv8tCZ7CwDw6nYvySt2xI
+//key2=AIzaSyDCwM3Ae5wQC231Aai9NyTG4Ds2SF6wphs
