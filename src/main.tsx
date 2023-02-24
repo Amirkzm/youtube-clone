@@ -7,11 +7,9 @@ import "./index.css";
 import theme from "./utils/theme";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CategoryContextProvider>
-        <App />
-      </CategoryContextProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <CategoryContextProvider>
+      <App />
+    </CategoryContextProvider>
+  </ThemeProvider>
 );
