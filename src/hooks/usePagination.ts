@@ -4,7 +4,7 @@ export interface usePaginationResult {
   paginationCount: number;
   currentPage: number;
   pageToken: string;
-  pageHandler: (event: React.ChangeEvent<unknown>, page: number) => void;
+  pageHandler: (page: number) => void;
 }
 
 const usePagination = (result: any): usePaginationResult => {
@@ -22,10 +22,7 @@ const usePagination = (result: any): usePaginationResult => {
     }
   }, [result]);
 
-  const pageHandler = (
-    event: React.ChangeEvent<unknown>,
-    page: number
-  ): void => {
+  const pageHandler = (page: number): void => {
     if (page > currentPage) {
       setPageToken(result?.nextPageToken);
     } else if (page < currentPage) {
