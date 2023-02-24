@@ -1,4 +1,4 @@
-import { Box, Grid, Pagination, Stack } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCategoryContext } from "../context/CategoryContext";
 import useLazyFetch from "../hooks/useLazyFetch";
@@ -6,6 +6,7 @@ import PageContainer from "../components/PageContainer";
 import Sidebar from "../components/layouts/Sidebar";
 import VideoFeed from "../components/videos/VideoFeed";
 import { usePagination } from "../hooks";
+import { Pagination } from "../components";
 
 const Feed = () => {
   const { selectedCategory, setSelectedCategory } = useCategoryContext();
@@ -72,13 +73,15 @@ const Feed = () => {
             )}
           </Grid>
         </Grid>
-        <Pagination
-          count={paginationCount}
+        {/* <Pagination
+          // count={paginationCount}
           color="primary"
           sx={{ alignSelf: "center", m: "40px" }}
           page={currentPage}
           onChange={pageHandler}
-        />
+          disabled={false}
+        /> */}
+        <Pagination page={currentPage} onChangePage={pageHandler} />
       </Stack>
     </PageContainer>
   );

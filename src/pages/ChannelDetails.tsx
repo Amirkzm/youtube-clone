@@ -1,4 +1,4 @@
-import { Box, Pagination, styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import useLazyFetch from "../hooks/useLazyFetch";
 import ChannelLogo from "../components/channels/ChannelLogo";
 import VideoFeed from "../components/videos/VideoFeed";
 import { usePagination } from "../hooks";
+import { Pagination } from "../components";
 
 const ChannelCardWrapper = styled(Box)((theme) => ({
   position: "absolute",
@@ -91,13 +92,14 @@ const ChannelDetails = () => {
           // parentPageHandler={pageHandler}
         />
       </Box>
-      <Pagination
+      {/* <Pagination
         count={paginationCount}
         color="primary"
         sx={{ alignSelf: "center", m: "40px" }}
         page={currentPage}
         onChange={pageHandler}
-      />
+      /> */}
+      <Pagination page={currentPage} onChangePage={pageHandler} />
     </Stack>
   );
 };

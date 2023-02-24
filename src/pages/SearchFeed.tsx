@@ -1,10 +1,11 @@
-import { Box, Pagination, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Stack } from "@mui/material";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useLazyFetch from "../hooks/useLazyFetch";
 import PageContainer from "../components/PageContainer";
 import VideoFeed from "../components/videos/VideoFeed";
 import { usePagination } from "../hooks";
+import { Pagination } from "../components";
 
 const SearchFeed = () => {
   const { sendRequest, isError, isLoading, result } = useLazyFetch();
@@ -53,13 +54,14 @@ const SearchFeed = () => {
         <Box sx={{ width: "80vw" }}>
           <VideoFeed result={result} isLoading={isLoading} />
         </Box>
-        <Pagination
+        {/* <Pagination
           count={paginationCount}
           color="primary"
           sx={{ alignSelf: "center", m: "40px" }}
           page={currentPage}
-          onChange={pageHandler}
-        />
+          onPageChange={pageHandler}
+        /> */}
+        <Pagination page={currentPage} onChangePage={pageHandler} />
       </Stack>
     </PageContainer>
   );
