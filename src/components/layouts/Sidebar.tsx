@@ -16,8 +16,8 @@ const Sidebar = () => {
       sx={{
         mt: "70px",
         height: "90vh",
-        pr: 2,
         borderRight: "2px solid gray",
+        width: "max-content",
       }}
     >
       {categories.map((category, index) => {
